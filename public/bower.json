@@ -1,0 +1,19 @@
+{
+  "name": "VideoPost",
+  "version": "0.0.0",
+  "authors": [
+    "ricdardox <ricardomontesrodriguez@gmail.com>"
+  ],
+  "description": "Prueba para ennovva",
+  "keywords": [
+    "VideoPost",
+    "Ricardo",
+    "montes"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "metro": "https://github.com/olton/Metro-UI-CSS.git#~3.0.13",
+    "jquery": "~2.1.4",
+    "angular": "1.4.7"
+  }
+}
