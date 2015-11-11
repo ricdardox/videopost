@@ -35,5 +35,14 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', ['uses' => 'Auth\PasswordController@getReset', 'as' => 'resetpassword']);
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+Route::resource('usuarios', 'UsuariosController');
+Route::controller('usuarioscon', 'UsuariosController');
+
+Route::get('usuarios/{id}/delete', [
+    'as' => 'usuarios.delete',
+    'uses' => 'UsuariosController@destroy',
+]);
+
 Route::resource('videopost', 'PostVideoController');
 Route::controller('videopostcon', 'PostVideoController');
+

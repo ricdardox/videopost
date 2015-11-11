@@ -23,11 +23,13 @@ app.directive("uploaderModel", [
 
 var InicioController = function ($scope, upload) {
     $scope.uploadFile = function () {
-        var name = $scope.comentario;
+        var titulo = $scope.titulo;
+        var descripcion = $scope.descripcion;
         var file = $scope.file;
-        console.log(name);
+        console.log(titulo);
+        console.log(descripcion);
         console.log(file);
-        upload.uploadFile(file, name).then(function (res) {
+        upload.uploadFile(titulo, descripcion, file).then(function (res) {
             console.log(res);
         });
     };
@@ -37,10 +39,11 @@ app.controller("InicioController", ["$scope", "upload", InicioController]);
 
 
 var UploadService = function ($http, $q) {
-    this.uploadFile = function (file, comentario) {
+    this.uploadFile = function (titulo, descripcion, file) {
         var deferred = $q.defer();
         var formData = new FormData();
-        formData.append('comentario', comentario);
+        formData.append('titulo', titulo);
+        formData.append('descripcion', descripcion);
         formData.append('file', file);
         return $http.post('videopostcon/uploadfile', formData, {
             'headers': {

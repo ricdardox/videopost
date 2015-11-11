@@ -12,8 +12,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "metro": "https://github.com/olton/Metro-UI-CSS.git#~3.0.13",
+    "angular": "1.4.7",
     "jquery": "~2.1.4",
-    "angular": "1.4.7"
+    "startbootstrap-sb-admin-2": "~1.0.7",
+    "sweetalert": "~1.1.3"
   }
 }

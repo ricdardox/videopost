@@ -10,15 +10,29 @@
         <meta name="author" content="">
 
         <title>VideoPost</title>
-        <link href="{!!URL::to('bower_components/metro/build/css/metro.css')!!}" rel="stylesheet">
-        <link href="{!!URL::to('bower_components/metro/build/css/metro-icons.css')!!}" rel="stylesheet">
-        <link href="{!!URL::to('bower_components/metro/build/css/metro-responsive.css')!!}" rel="stylesheet">
-        <link href="{!!URL::to('bower_components/metro/build/css/metro-schemes.css')!!}" rel="stylesheet">
 
-        <script src="{!!URL::to('bower_components/jquery/dist/jquery.js')!!}"></script>
-        <script src="{!!URL::to('bower_components/metro/build/js/metro.js')!!}"></script>
+        <!-- Bootstrap Core CSS -->
+        <link href="{!!URL::to('/')!!}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- MetisMenu CSS -->
+        <link href="{!!URL::to('/')!!}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- Timeline CSS -->
+        <link href="{!!URL::to('/')!!}/bower_components/startbootstrap-sb-admin-2/dist/css/timeline.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="{!!URL::to('/')!!}/bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Morris Charts CSS -->
+        <link href="{!!URL::to('/')!!}/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="{!!URL::to('/')!!}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+        <link href="{!!URL::to('/')!!}/bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+
+
         @yield('css')
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,40 +45,143 @@
     </head>
 
     <body>
-        <nav>
-            <div class="app-bar fixed-top navy" data-role="appbar">
-                <a class="app-bar-element branding" href="{!!URL::to('/')!!}">VideoPost</a>
 
-                @if(Auth::check())
-                <div class="app-bar-element place-right active-container">
-                    <span class="dropdown-toggle"><span class="mif-cog"></span>
-                        {!!Auth::user()->username!!}
-                    </span>
-                    <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-white" data-role="dropdown" data-no-close="true" style="width: 220px; display: none;">
+        <div id="wrapper">
 
-                        <ul class="unstyled-list">
-                            <li>   
-                                <a href="{!!route('logout')!!}"  class="white">  Salir</a>
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{!! route('home') !!}">
+                        {!! config('info.nombreApp') !!} 
+                    </a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+                    @if(Auth::check())
+
+                    <li class="dropdown">
+
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            {!!Auth::user()->name!!}
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="{!! URL::to('usuarioscon/mostrar') !!}"><i class="fa fa-user fa-fw"></i>
+                                    {!!Auth::user()->username!!}
+                                </a>
                             </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="{!!route('logout')!!}"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
+                            </li>
+                            @endif
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- /input-group -->
+                            </li>
+                            <li>
+                                <a href="{!!URL::to('/inicio')!!}">
+                                    <i class="fa fa-dashboard fa-fw"></i> Inicio</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> General<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <!--<a href="">Inicio</a>-->
+                                    </li>
+
+                                </ul>
+
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> Administración<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{!!URL::to('/usuarios')!!}">Usuarios</a>
+                                    </li> 
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li> 
                         </ul>
                     </div>
+                    <!-- /.sidebar-collapse -->
                 </div>
-                @endif
-                <div class="app-bar-pullbutton automatic" style="display: none;"></div><div class="clearfix" style="width: 0;"></div><nav class="app-bar-pullmenu hidden flexstyle-app-bar-menu" style="display: none;"><ul class="app-bar-pullmenubar hidden app-bar-menu"></ul></nav></div>
-        </nav>
+                <!-- /.navbar-static-side -->
+            </nav>
 
-        @yield('ruta')
-        <div class="panel panel-default">
-            <div class="panel-heading text-uppercase">
-                @yield('titulo')
+            <div id="page-wrapper">
+
+                <!-- /.row -->   
+
+                <div class="row">
+                    <br>
+                    @yield('ruta')
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-uppercase">
+                            @yield('titulo')
+                        </div>
+                        <div class="panel-body">
+                            @yield('content') 
+                        </div>
+                        <div class="panel-footer">
+                            @yield('footer')
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.row -->  <!-- /.row -->
             </div>
-            <div class="panel-body">
-                @yield('content') 
-            </div>
-            <div class="panel-footer">
-                @yield('footer')
-            </div>
+            <!-- /#page-wrapper -->
+
         </div>
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <script src="{!!URL::to('/')!!}/bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{!!URL::to('/')!!}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="{!!URL::to('/')!!}/bower_components/bootstrap/js/popover.js"></script>
+        <script src="{!!URL::to('/')!!}/bower_components/bootstrap/js/tooltip.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="{!!URL::to('/')!!}/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- Morris Charts JavaScript -->
+        <script src="{!!URL::to('/')!!}/bower_components/raphael/raphael-min.js"></script>
+        <script src="{!!URL::to('/')!!}/bower_components/morrisjs/morris.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="{!!URL::to('/')!!}/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+        <script src="{!!URL::to('/')!!}/bower_components/sweetalert/dist/sweetalert.min.js"></script>
         @yield('script')
 
     </body>

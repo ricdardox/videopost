@@ -1,45 +1,99 @@
-@extends('app')
+<!DOCTYPE html>
+<html lang="es">
 
-@section('content')
-<br>
-<br>
-<br>
-<div class="login-form padding20 block-shadow" style="opacity: 1; transform: scale(1); transition: 0.5s;">
-    @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        Por favor corrige los siguientes errores:<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-    <form class="" role="form" method="POST" action="{{ route('login')}}">
-        <h3 class="panel-title">Entrar a {!! config('info.nombreApp') !!}</h3>
-        <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-        <div class="input-control text"   data-role="input">
-            <span class="mif-user prepend-icon"></span>
-            <input type="text" placeholder="Usuario" name="username">
-        </div>
-        <div class="input-control text">
-            <span class="mif-lock prepend-icon"></span>
-            <input type="password" placeholder="Contraseña" name="password" type="password" value="" required="">
-        </div>
-        <br>
-        <label class="input-control checkbox small-check">
-            <input type="checkbox">
-            <span class="check"></span>
-            <span class="caption">Remember me</span>
-        </label>
-        <div class="form-actions">
-            <button class="button">Login</button>
-            <a href="{{ route('register')}}">Registrarme</a>
-        </div>
-        <br>
-        <a href="{{route('forgotpassword')}}">¿Olvidaste tu contraseña?</a>
+    <head>
 
-    </form>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-</div>
-@endsection
+        <title>Inicio de sesión {!! config('info.nombreApp') !!} </title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="{!!URL::to('/')!!}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="{!!URL::to('/')!!}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="{!!URL::to('/')!!}/bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="{!!URL::to('/')!!}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            body{
+                background: url('../img/g148.png')
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Entrar a {!! config('info.nombreApp') !!}</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                Por favor corrige los siguientes errores:<br><br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            <form class="" role="form" method="POST" action="{{ route('login')}}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Usuario" name="username" type="text" autofocus required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Contraseña" name="password" type="password" value="" required="">
+                                    </div> 
+                                    <!-- Change this to a button or input when using this as a form -->
+
+                                    <button type="submit" class="btn btn-lg btn-success btn-block">
+                                        Entrar
+                                    </button>
+                                    <a href="{{route('forgotpassword')}}">¿Olvidaste tu contraseña?</a>
+
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+
+    </body>
+
+</html>

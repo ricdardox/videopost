@@ -21,7 +21,7 @@ class VideoPostRequest extends Request {
     public function rules() {
         return [
             "comentario" => "required",
-            "file" => "required|mimes:avi,mp4"
+            "file" => "required|mimes:avi,mp4|size:100000"
         ];
     }
 

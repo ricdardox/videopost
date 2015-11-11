@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class PostVideoController extends Controller {
 
@@ -78,8 +79,21 @@ class PostVideoController extends Controller {
         //
     }
 
-    public function postUploadfile(Requests\VideoPostRequest $videoReq) {
-        print_r($videoReq->all());
+    public function getUploadfile(/* Requests\VideoPostRequest $videoReq */) {
+        $params = [
+            'title' => 'Laravel Screencast',
+            'description' => 'My First Laravel Tutorial!',
+            //'category_id' => 10,
+            'tags' => [
+                'laravel',
+                'eloquent',
+                'awesome' // Of course!
+            ]
+        ];
+        $file = Input::all();
+        $id = new \Dawson\Youtube\Youtube();
+        $id=$id->upload($file['file']->getPathName(), $params);
+        return $id;
     }
 
 }
